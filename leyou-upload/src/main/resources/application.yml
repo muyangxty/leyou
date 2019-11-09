@@ -1,0 +1,27 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: upload-service
+  servlet:
+    multipart:
+      max-file-size: 5MB
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10086/eureka
+  instance:
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 15
+fdfs:
+  # 超时时间
+  so-timeout: 1501
+  # 连接超时时间
+  connect-timeout: 601
+  # 缩略图
+  thumb-image:
+    width: 60
+    height: 60
+  # tracker地址：你的虚拟机服务器地址+端口（默认是22122）
+  tracker-list:
+    - 192.168.150.128:22122

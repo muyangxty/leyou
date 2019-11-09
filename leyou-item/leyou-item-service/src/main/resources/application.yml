@@ -1,0 +1,24 @@
+#端口
+server:
+  port: 8081
+#微服务名称
+spring:
+  application:
+    name: item-service
+  #数据源
+  datasource:
+    url: jdbc:mysql:///hm49?useUnicode=true&characeterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 529911
+#eureka注册中心
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10086/eureka
+  instance:
+    #心跳时间（续约时间）
+    lease-renewal-interval-in-seconds: 5
+    #过期时间
+    lease-expiration-duration-in-seconds: 5
+mybatis:
+  type-aliases-package: com.leyou.item.pojo
