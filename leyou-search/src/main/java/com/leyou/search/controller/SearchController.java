@@ -38,6 +38,7 @@ public class SearchController {
         if (request == null || CollectionUtils.isEmpty(result.getItems())) {
             return ResponseEntity.notFound().build();
         }
+        //返回200
         return ResponseEntity.ok(result);
     }
 }
