@@ -12,6 +12,14 @@ spring:
   jackson:
     #配置json处理时忽略空值
     default-property-inclusion: non_null
+  #RabbitMQ连接地址，端口已默认
+  rabbitmq:
+    host: 192.168.150.128
+    #虚拟主机
+    virtual-host: /leyou
+    #用户名与密码
+    username: root
+    password: root
 #eureka注册中心
 eureka:
   client:

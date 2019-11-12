@@ -123,6 +123,27 @@ public class SearchService {
         return goods;
     }
 
+
+    public PageResult<Goods> search(SearchRequest request) {
+        if (StringUtils.isBlank(request.getKey())) {
+            return null;
+        }
+        //构建查询条件
+        NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder();
+        //对key进行全文监所查询
+        queryBuilder.withQuery(QueryBuilders.matchQuery("all", request.getKey()).operator(Operator.AND));
+        //添加分页,分页页码从0开始
+        queryBuilder.withPageable(PageRequest.of(request.getPage() - 1, request.getSize()));
+        //添加结果集过滤，通过设置返回的结果字段，只需要id,skussubTitle
+        queryBuilder.withSourceFilter(new FetchSourceFilter(new String[]{"id", "skus", "subTitle"}, null));
+
+        //执行查询，获取结果集
+        Page<Goods> goodsPage = this.goodsRepository.search(queryBuilder.build());
+        //把结果封装并返回
+        return new PageResult<>(goodsPage.getTotalElements(), goodsPage.getTotalPages(), goodsPage.getContent());
+
+    }
+
     private String chooseSegment(String value, SpecParam p) {
         double val = NumberUtils.toDouble(value);
         String result = "其它";
@@ -150,24 +171,14 @@ public class SearchService {
         return result;
     }
 
-    public PageResult<Goods> search(SearchRequest request) {
-        if (StringUtils.isBlank(request.getKey())) {
-            return null;
-        }
-        //构建查询条件
-        NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder();
-        //对key进行全文监所查询
-        queryBuilder.withQuery(QueryBuilders.matchQuery("all", request.getKey()).operator(Operator.AND));
-        //添加分页,分页页码从0开始
-        queryBuilder.withPageable(PageRequest.of(request.getPage() - 1, request.getSize()));
-        //添加结果集过滤，通过设置返回的结果字段，只需要id,skussubTitle
-        queryBuilder.withSourceFilter(new FetchSourceFilter(new String[]{"id", "skus", "subTitle"}, null));
 
-        //执行查询，获取结果集
-        Page<Goods> goodsPage = this.goodsRepository.search(queryBuilder.build());
-        //把结果封装并返回
-        return new PageResult<>(goodsPage.getTotalElements(), goodsPage.getTotalPages(), goodsPage.getContent());
-
+    public void save(Long id) throws IOException {
+        Spu spu = this.goodsClient.querySpuById(id);
+        Goods goods = this.buildGoods(spu);
+        this.goodsRepository.save(goods);
     }
 
+    public void delete(Long id){
+        this.goodsRepository.deleteById(id);
+    }
 }

@@ -6,7 +6,7 @@ spring:
   #是否缓存
   thymeleaf:
     cache: false
-    #RabbitMQ连接地址，端口已默认
+  #RabbitMQ连接地址，端口已默认
   rabbitmq:
     host: 192.168.150.128
     #虚拟主机
