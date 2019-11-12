@@ -17,12 +17,17 @@ public class GoodsListener {
     @Autowired
     private SearchService searchService;
 
+    /**
+     *
+     * @param id
+     * @throws IOException
+     */
+    //消息监听
     @RabbitListener(bindings = @QueueBinding(
             value = @Queue(value = "LEYOU.SEARCH.SAVE.QUEUE", durable = "true"),
             exchange = @Exchange(value = "LEYOU.ITEM.EXCHANGE", ignoreDeclarationExceptions = "true", type = ExchangeTypes.TOPIC),
             key = {"item.insert", "item.update"}
     ))
-
     public void save(Long id) throws IOException {
         if (id == null){
             return;
