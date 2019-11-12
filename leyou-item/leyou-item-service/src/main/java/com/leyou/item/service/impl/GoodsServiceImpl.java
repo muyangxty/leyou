@@ -10,6 +10,8 @@ import com.leyou.item.service.ICategoryService;
 import com.leyou.item.service.IGoodsService;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.amqp.AmqpException;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,6 +51,9 @@ public class GoodsServiceImpl implements IGoodsService {
 
     @Autowired
     private ICategoryService categoryService;
+
+    @Autowired
+    private AmqpTemplate amqpTemplate;
 
 
     /**
@@ -124,6 +129,16 @@ public class GoodsServiceImpl implements IGoodsService {
         this.spuDetailMapper.insertSelective(spuDetail);
         //遍历sku集合，设置sku属性
         saveSkuAndStock(spuBo, now);
+
+        sengMsg("insert", spuBo.getId());
+    }
+
+    private void sengMsg(String type, Long id) {
+        try {
+            this.amqpTemplate.convertAndSend("item" + type, id);
+        } catch (AmqpException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -147,18 +162,6 @@ public class GoodsServiceImpl implements IGoodsService {
             //执行插入stock数据
             this.stockMapper.insertSelective(stock);
         });
-    }
-
-
-    /**
-     * 根据spuId,查询spuDetail
-     *
-     * @param spuId
-     * @return
-     */
-    @Override
-    public SpuDetail querySpuDetailBySpuId(Long spuId) {
-        return this.spuDetailMapper.selectByPrimaryKey(spuId);
     }
 
     /**
@@ -213,6 +216,19 @@ public class GoodsServiceImpl implements IGoodsService {
         this.spuMapper.updateByPrimaryKeySelective(spuBo);
         //执行修改spuDetail
         this.spuDetailMapper.updateByPrimaryKeySelective(spuBo.getSpuDetail());
+
+        sengMsg("update", spuBo.getId());
+    }
+
+    /**
+     * 根据spuId,查询spuDetail
+     *
+     * @param spuId
+     * @return
+     */
+    @Override
+    public SpuDetail querySpuDetailBySpuId(Long spuId) {
+        return this.spuDetailMapper.selectByPrimaryKey(spuId);
     }
 
 

@@ -10,6 +10,17 @@ spring:
     url: jdbc:mysql:///hm49?useUnicode=true&characeterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: root
     password: 529911
+  #RabbitMQ连接地址，端口已默认
+  rabbitmq:
+    host: 192.168.150.128
+    #虚拟主机
+    virtual-host: /leyou
+    #用户名与密码
+    username: root
+    password: root
+    #配置一个交换机
+    template:
+      exchange: LEYOU.ITEM.EXCHANGE
 #eureka注册中心
 eureka:
   client:
