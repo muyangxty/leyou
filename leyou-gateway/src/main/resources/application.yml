@@ -17,3 +17,5 @@ zuul:
     item-service: /item/**
     #路由到搜索微服务
     search-service: /search/**
+    #用户微服务
+    user-service: /user/**

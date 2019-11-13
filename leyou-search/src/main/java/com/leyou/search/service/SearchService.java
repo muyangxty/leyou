@@ -123,7 +123,6 @@ public class SearchService {
         return goods;
     }
 
-
     public PageResult<Goods> search(SearchRequest request) {
         if (StringUtils.isBlank(request.getKey())) {
             return null;
@@ -171,7 +170,6 @@ public class SearchService {
         return result;
     }
 
-
     public void save(Long id) throws IOException {
         Spu spu = this.goodsClient.querySpuById(id);
         Goods goods = this.buildGoods(spu);
@@ -181,4 +179,5 @@ public class SearchService {
     public void delete(Long id){
         this.goodsRepository.deleteById(id);
     }
+
 }
