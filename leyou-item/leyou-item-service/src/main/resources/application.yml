@@ -12,7 +12,7 @@ spring:
     password: 529911
   #RabbitMQ连接地址，端口已默认
   rabbitmq:
-    host: 192.168.150.128
+    host: 127.0.0.1
     #虚拟主机
     virtual-host: /leyou
     #用户名与密码

@@ -29,6 +29,12 @@ public class CodecUtils {
         return DigestUtils.md5Hex(salt + DigestUtils.md5Hex(data));
     }
 
+    /**
+     * 进行sha加密
+     * @param data 需要加密的数据
+     * @param salt 盐
+     * @return
+     */
     public static String shaHex(String data, String salt) {
         if (StringUtils.isBlank(salt)) {
             salt = data.hashCode() + "";
