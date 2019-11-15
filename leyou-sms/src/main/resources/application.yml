@@ -4,19 +4,19 @@ spring:
   application:
     name: sms-service
   rabbitmq:
-    host: 127.0.0.1
+    host: 192.168.0.159
     virtual-host: /leyou
     username: leyou
     password: leyou
 
-#短信服务
+#阿里云短信服务
 leyou:
   sms:
     # 你自己的accessKeyId
-    accessKeyId: JWffwFJIwada
+    accessKeyId: LTAI4FvrBeD62LWLLG5eJPPJ
     # 你自己的AccessKeySecret
-    accessKeySecret: aySRliswq8fe7rF9gQyy1Izz4MQ
+    accessKeySecret: eUzQSCcFmhZGMzuxRAKIXLBSL1XsHH
     # 签名名称
-    signName: 乐优商城
+    signName: CRM系统
     # 模板名称
-    verifyCodeTemplate: SMS_133976814
+    verifyCodeTemplate: SMS_177545985

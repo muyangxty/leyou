@@ -14,12 +14,12 @@ spring:
     default-property-inclusion: non_null
   #RabbitMQ连接地址，端口已默认
   rabbitmq:
-    host: 127.0.0.1
+    host: 192.168.0.159
     #虚拟主机
     virtual-host: /leyou
     #用户名与密码
-    username: root
-    password: root
+    username: leyou
+    password: leyou
 #eureka注册中心
 eureka:
   client:

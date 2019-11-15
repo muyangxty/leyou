@@ -24,3 +24,9 @@ zuul:
   add-host-header: true
   #覆盖默认敏感头信息
   sensitive-headers:
+leyou:
+  jwt:
+    # 公钥地址
+    pubKeyPath: C:\\tmp\\rsa\\rsa.pub
+    # cookie名字
+    cookieName: LY_TOKEN

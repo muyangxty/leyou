@@ -8,7 +8,7 @@ spring:
     cache: false
   #RabbitMQ连接地址，端口已默认
   rabbitmq:
-    host: 127.0.0.1
+    host: 192.168.0.159
     #虚拟主机
     virtual-host: /leyou
     #用户名与密码
