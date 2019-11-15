@@ -72,4 +72,14 @@ public class SpecificationServiceImpl implements ISpecificationService {
         this.gorupMapper.deleteByExample(gid);
     }
 
+    @Override
+    public List<SpecGroup> queryGroupWithParam(Long cid) {
+        List<SpecGroup> groups = this.queryGroupByCid(cid);
+        groups.forEach(group ->{
+            List<SpecParam> params = this.queryParams(group.getId(), null, null, null);
+            group.setParams(params);
+        });
+        return groups;
+    }
+
 }

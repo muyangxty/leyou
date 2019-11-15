@@ -3,7 +3,7 @@ server:
 spring:
   application:
     name: goods-web
-  #是否缓存
+  #是否缓存模板
   thymeleaf:
     cache: false
   #RabbitMQ连接地址，端口已默认
@@ -12,8 +12,8 @@ spring:
     #虚拟主机
     virtual-host: /leyou
     #用户名与密码
-    username: root
-    password: root
+    username: leyou
+    password: leyou
 eureka:
   client:
     service-url:

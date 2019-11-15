@@ -133,56 +133,6 @@ public class GoodsServiceImpl implements IGoodsService {
         sengMsg("insert", spuBo.getId());
     }
 
-    private void sengMsg(String type, Long id) {
-        try {
-            this.amqpTemplate.convertAndSend("item" + type, id);
-        } catch (AmqpException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * 遍历sku集合，设置sku属性
-     *
-     * @param spuBo spuBo数据
-     * @param now   系统当前时间
-     */
-    private void saveSkuAndStock(SpuBo spuBo, Date now) {
-        spuBo.getSkus().forEach(sku -> {
-            sku.setId(null);
-            sku.setSpuId(spuBo.getId());
-            sku.setCreateTime(now);
-            sku.setLastUpdateTime(now);
-            //执行插入sku数据
-            this.skuMapper.insertSelective(sku);
-            //设置stock属性
-            Stock stock = new Stock();
-            stock.setSkuId(sku.getId());
-            stock.setStock(sku.getStock());
-            //执行插入stock数据
-            this.stockMapper.insertSelective(stock);
-        });
-    }
-
-    /**
-     * 根据spuId查询sku集合
-     *
-     * @param spuId
-     * @return
-     */
-    @Override
-    public List<Sku> querySkusBySpuId(Long spuId) {
-        Sku record = new Sku();
-        record.setSpuId(spuId);
-        List<Sku> skus = this.skuMapper.select(record);
-        //遍历sku集合，获取每个skuId,并查询stock库存
-        skus.forEach(sku -> {
-            Stock stock = this.stockMapper.selectByPrimaryKey(sku.getId());
-            sku.setStock(stock.getStock());
-        });
-        return skus;
-    }
-
     /**
      * 修改（更新）商品信息
      *
@@ -221,6 +171,30 @@ public class GoodsServiceImpl implements IGoodsService {
     }
 
     /**
+     * 根据spuId查询sku集合
+     *
+     * @param spuId
+     * @return
+     */
+    @Override
+    public List<Sku> querySkusBySpuId(Long spuId) {
+        Sku record = new Sku();
+        record.setSpuId(spuId);
+        List<Sku> skus = this.skuMapper.select(record);
+        //遍历sku集合，获取每个skuId,并查询stock库存
+        skus.forEach(sku -> {
+            Stock stock = this.stockMapper.selectByPrimaryKey(sku.getId());
+            sku.setStock(stock.getStock());
+        });
+        return skus;
+    }
+
+    @Override
+    public Spu querySpuById(Long id) {
+        return this.spuMapper.selectByPrimaryKey(id);
+    }
+
+    /**
      * 根据spuId,查询spuDetail
      *
      * @param spuId
@@ -229,6 +203,37 @@ public class GoodsServiceImpl implements IGoodsService {
     @Override
     public SpuDetail querySpuDetailBySpuId(Long spuId) {
         return this.spuDetailMapper.selectByPrimaryKey(spuId);
+    }
+
+    private void sengMsg(String type, Long id) {
+        try {
+            this.amqpTemplate.convertAndSend("item" + type, id);
+        } catch (AmqpException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 遍历sku集合，设置sku属性
+     *
+     * @param spuBo spuBo数据
+     * @param now   系统当前时间
+     */
+    private void saveSkuAndStock(SpuBo spuBo, Date now) {
+        spuBo.getSkus().forEach(sku -> {
+            sku.setId(null);
+            sku.setSpuId(spuBo.getId());
+            sku.setCreateTime(now);
+            sku.setLastUpdateTime(now);
+            //执行插入sku数据
+            this.skuMapper.insertSelective(sku);
+            //设置stock属性
+            Stock stock = new Stock();
+            stock.setSkuId(sku.getId());
+            stock.setStock(sku.getStock());
+            //执行插入stock数据
+            this.stockMapper.insertSelective(stock);
+        });
     }
 
 

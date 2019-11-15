@@ -4,6 +4,7 @@ package com.leyou.search.controller;
 import com.leyou.search.pojo.SearchRequest;
 import com.leyou.search.pojo.SearchResult;
 import com.leyou.search.service.SearchService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
@@ -40,5 +41,4 @@ public class SearchController {
         //返回200
         return ResponseEntity.ok(result);
     }
-
 }
