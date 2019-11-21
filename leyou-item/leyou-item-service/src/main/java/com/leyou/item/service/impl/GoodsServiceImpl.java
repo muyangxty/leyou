@@ -9,6 +9,7 @@ import com.leyou.item.pojo.*;
 import com.leyou.item.service.ICategoryService;
 import com.leyou.item.service.IGoodsService;
 
+import com.sun.media.jfxmedia.logging.Logger;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.core.AmqpTemplate;
@@ -205,9 +206,14 @@ public class GoodsServiceImpl implements IGoodsService {
         return this.spuDetailMapper.selectByPrimaryKey(spuId);
     }
 
+    /**
+     * 消息生产者--保存或修改商品
+     * @param type
+     * @param id
+     */
     private void sengMsg(String type, Long id) {
         try {
-            this.amqpTemplate.convertAndSend("item" + type, id);
+            this.amqpTemplate.convertAndSend("item." + type, id);
         } catch (AmqpException e) {
             e.printStackTrace();
         }
