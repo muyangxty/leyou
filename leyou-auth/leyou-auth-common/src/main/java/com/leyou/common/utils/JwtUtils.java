@@ -1,15 +1,23 @@
 package com.leyou.common.utils;
 
 import com.leyou.common.pojo.UserInfo;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+
 import org.joda.time.DateTime;
 
 import java.security.PrivateKey;
 import java.security.PublicKey;
 
+/**
+ * JWT工具类
+ *
+ * @author MuYang
+ * @date 2019-11-23
+ */
 public class JwtUtils {
     /**
      * 私钥加密token

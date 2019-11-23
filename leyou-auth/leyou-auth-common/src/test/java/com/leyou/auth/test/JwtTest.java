@@ -9,6 +9,7 @@ import org.junit.Test;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 
+
 public class JwtTest {
 
     private static final String pubKeyPath = "C:\\tmp\\rsa\\rsa.pub";
@@ -34,12 +35,12 @@ public class JwtTest {
     public void testGenerateToken() throws Exception {
         // 生成token
         String token = JwtUtils.generateToken(new UserInfo(20L, "jack"), privateKey, 5);
-        System.out.println("token = " + token);
+        System.err.println("token = " + token);
     }
 
     @Test
     public void testParseToken() throws Exception {
-        String token = "eyJhbGciOiJSUzI1NiJ9.eyJpZCI6MjAsInVzZXJuYW1lIjoiamFjayIsImV4cCI6MTU3MzczMDIwM30.jmgA_1zppJfG3UAiM7aqclquQucO6WaR1KNjb-lL9d9gbNzq2dAx4I2j1vUEB7zhvTFhlaIdHYyQVAYtQ1dj44HAvP2th9UREGhc6vt-4sFRkfgsYstci5ird97GKkheKiXPY7ID-tIxQqq1QHn8PR4MHmsrSEHnlmFGGjWD9zI";
+        String token = "eyJhbGciOiJSUzI1NiJ9.eyJpZCI6MjAsInVzZXJuYW1lIjoiamFjayIsImV4cCI6MTU3NDQ3ODk3Mn0.NYYGwuv4E95XXX7GQ5RWjFMYMcbOzGj65VDA3fZa3iySZc0RjoN85ZpoE7n4nHuzE5X6Ih5Wde_9jJG8L_CwE4I_2UhgiAALcwPW_t8AWXHsRtfZ4YGzjGGg0jarKEOzdz91U3jygwoxBxFw2ZYnfoz-ANf9bb-7HBhhMSockOI";
 
         // 解析token
         UserInfo user = JwtUtils.getInfoFromToken(token, publicKey);

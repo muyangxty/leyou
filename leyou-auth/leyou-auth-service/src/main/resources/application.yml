@@ -1,12 +1,16 @@
+#此微服务端口
 server:
   port: 8087
+#微服务名称
 spring:
   application:
     name: auth-service
+#注册中心
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:10086/eureka
+    #拉取服务时间
     registry-fetch-interval-seconds: 10
   instance:
     # 每隔5秒发送一次心跳
@@ -15,7 +19,7 @@ eureka:
     lease-expiration-duration-in-seconds: 10
 leyou:
   jwt:
-    # 登录校验的密钥
+    # 登录校验的密钥(salt--盐)
     secret: leyou@Login(Auth}*^31)&heiMa%
     # 公钥地址
     pubKeyPath: C:\\tmp\\rsa\\rsa.pub

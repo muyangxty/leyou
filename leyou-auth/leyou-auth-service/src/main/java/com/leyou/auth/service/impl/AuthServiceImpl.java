@@ -9,6 +9,11 @@ import com.leyou.user.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * 授权中心相关的业务层实现类
+ *
+ * @author MuYang
+ */
 @Service
 public class AuthServiceImpl implements IAuthService {
 
@@ -23,7 +28,7 @@ public class AuthServiceImpl implements IAuthService {
         //根据用户名和密码查询
         User user = this.userClient.queryUser(username, password);
         //判断user是否为null
-        if (user == null){
+        if (user == null) {
             return null;
         }
 
@@ -40,4 +45,5 @@ public class AuthServiceImpl implements IAuthService {
         }
         return null;
     }
+
 }
