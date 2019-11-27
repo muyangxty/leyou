@@ -21,6 +21,11 @@ zuul:
     user-service: /user/**
     #路由到授权微服务
     auth-service: /auth/**
+    #路由到购物车微服务
+    cart-service: /cart/**
+    #路由到订单微服务
+    order-service: /order/**
+
   #是否携带域名头信息
   add-host-header: true
   #覆盖默认敏感头信息
