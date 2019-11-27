@@ -73,6 +73,7 @@ public class UserController {
     public ResponseEntity<User> queryUser(@RequestParam("username") String username, @RequestParam("password") String password) {
         User user = this.userService.queryUser(username, password);
         if (user == null) {
+
             return ResponseEntity.badRequest().build();
         }
         return ResponseEntity.ok(user);
