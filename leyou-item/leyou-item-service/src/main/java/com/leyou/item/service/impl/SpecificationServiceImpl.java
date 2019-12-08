@@ -1,6 +1,6 @@
 package com.leyou.item.service.impl;
 
-import com.leyou.item.mapper.SpecGorupMapper;
+import com.leyou.item.mapper.SpecGroupMapper;
 import com.leyou.item.mapper.SpecParamMapper;
 import com.leyou.item.pojo.SpecGroup;
 import com.leyou.item.pojo.SpecParam;
@@ -20,7 +20,7 @@ import java.util.List;
 public class SpecificationServiceImpl implements ISpecificationService {
 
     @Autowired
-    private SpecGorupMapper gorupMapper;
+    private SpecGroupMapper groupMapper;
 
     @Autowired
     private SpecParamMapper paramMapper;
@@ -35,7 +35,7 @@ public class SpecificationServiceImpl implements ISpecificationService {
     public List<SpecGroup> queryGroupByCid(Long cid) {
         SpecGroup record = new SpecGroup();
         record.setCid(cid);
-        return this.gorupMapper.select(record);
+        return this.groupMapper.select(record);
     }
 
     /**
@@ -59,7 +59,7 @@ public class SpecificationServiceImpl implements ISpecificationService {
 
     @Override
     public void save(SpecGroup specGroup) {
-        this.gorupMapper.insertSelective(specGroup);
+        this.groupMapper.insertSelective(specGroup);
     }
 
     /**
@@ -69,7 +69,7 @@ public class SpecificationServiceImpl implements ISpecificationService {
      */
     @Override
     public void deleteById(Long gid) {
-        this.gorupMapper.deleteByExample(gid);
+        this.groupMapper.deleteByExample(gid);
     }
 
     @Override

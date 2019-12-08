@@ -32,7 +32,7 @@ public class SpecificationController {
      * @param cid 分类id
      * @return
      */
-    @RequestMapping("gorups/{cid}")
+    @RequestMapping("groups/{cid}")
     public ResponseEntity<List<SpecGroup>> queryGroupByCid(@PathVariable("cid") Long cid) {
         List<SpecGroup> groups = this.specificationService.queryGroupByCid(cid);
         if (CollectionUtils.isEmpty(groups)) {
@@ -101,13 +101,14 @@ public class SpecificationController {
 
     /**
      * 根据cid查询参数组
+     *
      * @param cid
      * @return
      */
     @GetMapping("group/param/{cid}")
-    public ResponseEntity<List<SpecGroup>> queryGroupWithParam(@PathVariable("cid")Long cid){
+    public ResponseEntity<List<SpecGroup>> queryGroupWithParam(@PathVariable("cid") Long cid) {
         List<SpecGroup> groups = this.specificationService.queryGroupWithParam(cid);
-        if (CollectionUtils.isEmpty(groups)){
+        if (CollectionUtils.isEmpty(groups)) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(groups);

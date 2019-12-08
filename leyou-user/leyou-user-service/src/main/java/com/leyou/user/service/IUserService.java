@@ -2,10 +2,17 @@ package com.leyou.user.service;
 
 import com.leyou.user.pojo.User;
 
+/**
+ * 用户微服务业务层接口
+ *
+ * @author MuYang
+ * @Date 2019-11-13
+ */
 public interface IUserService {
 
     /**
      * 校验数据是否可用
+     *
      * @param data 要检验的数据
      * @param type 要校验的数据类型，1-用户名，2-手机
      * @return
@@ -14,12 +21,14 @@ public interface IUserService {
 
     /**
      * 发送验证码
+     *
      * @param phone 手机
      */
-    void sendVeifyCode(String phone);
+    void sendVerifyCode(String phone);
 
     /**
      * 用户注册
+     *
      * @param user 用户数据
      * @param code 验证码
      */
@@ -27,6 +36,7 @@ public interface IUserService {
 
     /**
      * 根据用户名和密码查询用户
+     *
      * @param username 用户名
      * @param password 密码
      * @return

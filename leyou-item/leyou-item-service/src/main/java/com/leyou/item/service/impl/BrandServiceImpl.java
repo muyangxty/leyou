@@ -10,8 +10,8 @@ import com.leyou.item.service.IBrandService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import org.springframework.transaction.annotation.Transactional;
+
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
@@ -27,6 +27,16 @@ public class BrandServiceImpl implements IBrandService {
     @Autowired
     private BrandMapper brandMapper;
 
+    /**
+     * 分页查询品牌信息
+     *
+     * @param key    查询条件
+     * @param page   当前页数
+     * @param rows   每页显示记录数
+     * @param sortBy 排序字段
+     * @param desc   排序标准（降序 or 升序）
+     * @return
+     */
     @Override
     public PageResult<Brand> queryBrandByPage(String key, Integer page, Integer rows, String sortBy, Boolean desc) {
         //初始化example对象
@@ -49,6 +59,12 @@ public class BrandServiceImpl implements IBrandService {
         return new PageResult<>(PageInfo.getTotal(), PageInfo.getList());
     }
 
+    /**
+     * 新增品牌
+     *
+     * @param brand 品牌
+     * @param cids  cid
+     */
     @Override
     //事务
     @Transactional
@@ -65,6 +81,7 @@ public class BrandServiceImpl implements IBrandService {
 
     /**
      * 根据分类id,查询品牌列表
+     *
      * @param cid 分类id
      * @return
      */

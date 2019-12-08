@@ -28,20 +28,20 @@ public class GoodsController {
     /**
      * 根据条件分页查询spu
      *
-     * @param key
+     * @param key      查询条件
      * @param saleable
-     * @param page
-     * @param rows
+     * @param page     当前页数
+     * @param rows     显示记录数
      * @return
      */
     @GetMapping("spu/page")
     public ResponseEntity<PageResult<SpuBo>> querySpuBoByPage(
-            @RequestParam(value = "key", required = false)String key,
-            @RequestParam(value = "saleable", required = false)Boolean saleable,
-            @RequestParam(value = "page", defaultValue = "1")Integer page,
-            @RequestParam(value = "rows", defaultValue = "5")Integer rows){
+            @RequestParam(value = "key", required = false) String key,
+            @RequestParam(value = "saleable", required = false) Boolean saleable,
+            @RequestParam(value = "page", defaultValue = "1") Integer page,
+            @RequestParam(value = "rows", defaultValue = "5") Integer rows) {
         PageResult<SpuBo> pageResult = this.goodsService.querySpuBoByPage(key, saleable, page, rows);
-        if(CollectionUtils.isEmpty(pageResult.getItems())){
+        if (CollectionUtils.isEmpty(pageResult.getItems())) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(pageResult);
@@ -50,7 +50,7 @@ public class GoodsController {
     /**
      * 新增商品
      *
-     * @param spuBo
+     * @param spuBo 商品数据
      * @return
      */
     @PostMapping("goods")
@@ -62,7 +62,7 @@ public class GoodsController {
     /**
      * 修改（更新）商品信息
      *
-     * @param spuBo
+     * @param spuBo 商品数据
      * @return
      */
     @PutMapping("goods")
@@ -75,11 +75,11 @@ public class GoodsController {
     /**
      * 根据spuId,查询spuDetail
      *
-     * @param spuId
+     * @param spuId id
      * @return
      */
     @GetMapping("spu/detail/{spuId}")
-    public ResponseEntity<SpuDetail> querySpuDetailBySpuId(@PathVariable("spuId")Long spuId){
+    public ResponseEntity<SpuDetail> querySpuDetailBySpuId(@PathVariable("spuId") Long spuId) {
         SpuDetail spuDetail = this.goodsService.querySpuDetailBySpuId(spuId);
         if (spuDetail == null) {
             return ResponseEntity.notFound().build();
@@ -104,7 +104,7 @@ public class GoodsController {
 
 
     @GetMapping("{id}")
-    public ResponseEntity<Spu> querySpuById(@PathVariable("id")Long id){
+    public ResponseEntity<Spu> querySpuById(@PathVariable("id") Long id) {
         Spu spu = this.goodsService.querySpuById(id);
         if (spu == null) {
             return ResponseEntity.notFound().build();
@@ -113,7 +113,7 @@ public class GoodsController {
     }
 
     @GetMapping("sku/{skuId}")
-    public ResponseEntity<Sku> querySkuBySkuId(@PathVariable("skuId")Long skuId){
+    public ResponseEntity<Sku> querySkuBySkuId(@PathVariable("skuId") Long skuId) {
         Sku sku = this.goodsService.querySkuBySkuId(skuId);
         if (sku == null) {
             return ResponseEntity.notFound().build();

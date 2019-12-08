@@ -5,11 +5,13 @@ import com.github.pagehelper.PageInfo;
 import com.leyou.common.pojo.PageResult;
 import com.leyou.item.bo.SpuBo;
 import com.leyou.item.mapper.*;
-import com.leyou.item.pojo.*;
+import com.leyou.item.pojo.Sku;
+import com.leyou.item.pojo.Spu;
+import com.leyou.item.pojo.SpuDetail;
+import com.leyou.item.pojo.Stock;
 import com.leyou.item.service.ICategoryService;
 import com.leyou.item.service.IGoodsService;
 
-import com.sun.media.jfxmedia.logging.Logger;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.core.AmqpTemplate;
@@ -24,11 +26,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 /**
- * 商品相关的业务层实现类+
+ * 商品相关的业务层实现类
  *
  * @author MuYang
  */
@@ -87,7 +88,7 @@ public class GoodsServiceImpl implements IGoodsService {
         PageInfo<Spu> pageInfo = new PageInfo<>(spus);
 
         List<SpuBo> spuBos = new ArrayList<>();
-        spus.forEach(spu->{
+        spus.forEach(spu -> {
             SpuBo spuBo = new SpuBo();
             // copy共同属性的值到新的对象
             BeanUtils.copyProperties(spu, spuBo);
@@ -213,6 +214,7 @@ public class GoodsServiceImpl implements IGoodsService {
 
     /**
      * 消息生产者--保存或修改商品
+     *
      * @param type
      * @param id
      */

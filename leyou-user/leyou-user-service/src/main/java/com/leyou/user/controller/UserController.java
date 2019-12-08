@@ -3,6 +3,7 @@ package com.leyou.user.controller;
 
 import com.leyou.user.pojo.User;
 import com.leyou.user.service.IUserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 
+/**
+ * 用户微服务控制器层
+ *
+ * @author MuYang
+ * @Date 2019-12-07
+ */
 @Controller
 public class UserController {
 
@@ -44,8 +51,8 @@ public class UserController {
      * @return
      */
     @PostMapping("code")
-    public ResponseEntity<Void> sendVeifyCode(@RequestParam("phone") String phone) {
-        this.userService.sendVeifyCode(phone);
+    public ResponseEntity<Void> sendVerifyCode(@RequestParam("phone") String phone) {
+        this.userService.sendVerifyCode(phone);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
@@ -73,7 +80,6 @@ public class UserController {
     public ResponseEntity<User> queryUser(@RequestParam("username") String username, @RequestParam("password") String password) {
         User user = this.userService.queryUser(username, password);
         if (user == null) {
-
             return ResponseEntity.badRequest().build();
         }
         return ResponseEntity.ok(user);

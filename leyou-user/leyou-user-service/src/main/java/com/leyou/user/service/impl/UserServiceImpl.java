@@ -70,7 +70,7 @@ public class UserServiceImpl implements IUserService {
      * @param phone 手机
      */
     @Override
-    public void sendVeifyCode(String phone) {
+    public void sendVerifyCode(String phone) {
         if (StringUtils.isBlank(phone)) {
             return;
         }
@@ -108,9 +108,9 @@ public class UserServiceImpl implements IUserService {
         //加盐加密
         user.setPassword(CodecUtils.md5Hex(user.getPassword(), salt));
 
-        //新增用户
         user.setId(null);
         user.setCreated(new Date());
+        //执行新增用户
         this.userMapper.insertSelective(user);
     }
 

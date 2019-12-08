@@ -22,5 +22,4 @@ public class SpecParam {
     private Boolean searching;
     private String segments;
 
-    // getter和setter ...
 }
